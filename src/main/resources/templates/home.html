@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href='@{/css/style.css}'>
+    <title>Système de Gestion de Tickets</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div class="jumbotron">
+    <h1 class="display-4">Bienvenue sur le Système de Gestion de Tickets</h1>
+    <p class="lead">Trouvez et achetez des tickets pour vivre des expériences uniques.</p>
+    <a class="btn btn-primary btn-lg cta-button" href="/acheter-ticket" role="button">Acheter un Ticket</a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 feature">
+            <img th:src="@{img/concert-icon.jpg}" alt="Concert Icon" class="img-fluid mb-2">
+            <h3>Concerts</h3>
+            <p>Découvrez les meilleurs concerts et réservez vos places dès maintenant.</p>
+        </div>
+        <div class="col-sm-4 feature">
+            <img th:src="@{img/voyage-icon.jpg}" alt="Voyage Icon" class="img-fluid mb-2">
+            <h3>Voyages</h3>
+            <p>Planifiez vos voyages avec facilité en réservant vos billets en ligne.</p>
+        </div>
+        <div class="col-sm-4 feature">
+            <img th:src="@{/img/autre-evenement-icon.png}" alt="Autre Événement Icon" class="img-fluid mb-2">
+            <h3>Autres Événements</h3>
+            <p>Explorez une variété d'événements et créez des souvenirs exceptionnels.</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
