@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Passager</title>
+    <link rel="stylesheet" type="text/css" th:href='@{/css/style.css}'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div class="container ">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        Ajouter des passagers
+    </button>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Nom du passager</th>
+            <th>Prenom du passager</th>
+            <th>Adresse du passager</th>
+            <th>Email du passager</th>
+            <th>Telephone du passager</th>
+            <th> Actions </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="passager : ${listPassagers}">
+            <td th:text="${passager.nom}"></td>
+            <td th:text="${passager.prenom}"></td>
+            <td th:text="${passager.adresse}"></td>
+            <td th:text="${passager.email}"></td>
+            <td th:text="${passager.telephone}"></td>
+
+            <td> <a th:href="@{/showFormForUpdate/{id}(id=${passager.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/deletePassager/{id}(id=${passager.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">FORMULAIRE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                <form action="#" th:action="@{/savePassager}" th:object="${passager}" method="POST">
+                    <input type="text"  placeholder="Veuille entre votre nom " class="form-control"    name="nom">
+                    <br>
+                    <input type="text"  placeholder="Veuille entre votre prenom" class="form-control" name="prenom">
+                    <br>
+                    <input type="text"  placeholder="Veuille entre votre adresse " class="form-control" name="adresse">
+                    <br>
+                    <input type="text"  placeholder="Veuille entre votre email" class="form-control"  name="email">
+                    <br>
+                    <input type="text"  placeholder="Veuille entre votre numero " class="form-control"  name="telephone">
+                    <br>
+                    <button type="submit" class="btn btn-info">Enregistrer</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ferme</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,5 +1,9 @@
 body {
-    background-color: #f8f9fa;
+
+    backgroud-color: white;
+}
+input{
+    height: 600px;
 }
 .jumbotron {
     background-image: url('../img/background-image.jpg');
