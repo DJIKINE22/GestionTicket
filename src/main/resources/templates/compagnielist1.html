@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:https="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" th:href="@{/admin-page}">Admin Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/compagnies}">Compagnies</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#reservations">Réservations</a>
+      </li>
+      <!--<li class="nav-item">
+          <a class="nav-link" href="#buses">Liste des Bus</a>
+      </li>-->
+      <li class="nav-item">
+        <a class="nav-link" href="#reservation">Réservation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#achat">Achat de Ticket</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:if="${currentUser == null}" href="/logout">Déconnexion</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container my-5">
+  <h1 class="text-center">NOS COMPAGNIES DE TRANSPORT!</h1>
+  <table class="table table-striped table-hover table-bordered">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Ajouter une Compagnie
+    </button>
+    <thead class="table-header">
+    <tr class="bg-primary">
+      <th class="text-center" scope="col">Identifiant</th>
+      <th class="text-center"  scope="col">Nom de la Compagnie</th>
+      <th class="text-center"  scope="col">Lieu</th>
+      <th class="text-center"   >Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="C :${compagnies}">
+
+      <td class="text-center"  th:text="${C.id}"></td>
+      <td class="text-center"  th:text="${C.nom}"></td>
+      <td class="text-center"  th:text="${C.lieu}"></td>
+      <td class="text-center" >
+        <a th:href="@{'/delete/' + ${C.id}}" class="btn btn-danger">Delete</a>
+        <a th:href="@{/Update/{id}(id=${C.id})}" class="btn btn-primary">Edit</a>
+
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal  AJOUT-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title my-3" id="exampleModalLabel">Ajouter une Nouvelle Compagnie</h5>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+        <form  th:action="@{/RegisterCompa}" method="post">
+          <h2 class="text-center">Nouvelle Compagnie</h2>
+          <div class="form-group">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" placeholder="Nom de la compagnie" class="form-control" id="nom" name="nom">
+          </div>
+          <div class="form-group">
+            <label for="prenom" class="form-label">lieu</label>
+            <input type="text" id="prenom" placeholder="Lieu" class="form-control" name="lieu">
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center my-4">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUcAkX2J/M"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXmY"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyFj8itshY4/4W1OqDfmq3nYjStO+ftZDZ"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
