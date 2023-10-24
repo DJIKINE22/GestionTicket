@@ -51,7 +51,7 @@ public class CompagnieController {
         model.addAttribute("renverseSortDirt", sortDir.equals("asc")? "dsc" : "asc");
 
 
-        return "compagnielist";
+        return "compagnies";
 
 
 

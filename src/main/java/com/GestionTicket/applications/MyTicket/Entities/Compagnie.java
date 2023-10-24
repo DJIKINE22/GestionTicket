@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "compagnie")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Compagnie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

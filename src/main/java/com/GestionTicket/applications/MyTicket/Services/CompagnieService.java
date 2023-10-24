@@ -24,10 +24,8 @@ public class CompagnieService {
 
         compagnieRepository.save(compagnie);
     }
-    public List<Compagnie> allCompa(String keyword){
-        if (keyword !=null){
-            return this.compagnieRepository.findAll(keyword);
-        }
+    public List<Compagnie> allCompa(){
+
         return  this.compagnieRepository.findAll();
     }
 

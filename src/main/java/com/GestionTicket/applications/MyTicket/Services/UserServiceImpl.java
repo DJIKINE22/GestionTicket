@@ -5,6 +5,10 @@ import com.GestionTicket.applications.MyTicket.Entities.Compagnie;
 import com.GestionTicket.applications.MyTicket.Entities.User;
 import com.GestionTicket.applications.MyTicket.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +62,13 @@ public class UserServiceImpl implements UserService{
     }
     public void deleteUserById(Long id) {
         userRepository.deleteById( id);
+    }
+
+    public Page<User> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())? Sort.by(sortField).ascending():
+                Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo -1,pageSize,sort);
+        return this.userRepository.findAll(pageable);
     }
 
 }

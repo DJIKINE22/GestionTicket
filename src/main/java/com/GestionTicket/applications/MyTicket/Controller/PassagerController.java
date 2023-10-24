@@ -1,27 +1,53 @@
 package com.GestionTicket.applications.MyTicket.Controller;
 
+import com.GestionTicket.applications.MyTicket.Entities.User;
 import com.GestionTicket.applications.MyTicket.Entity.Passager;
 import com.GestionTicket.applications.MyTicket.Service.PassagerService;
+import com.GestionTicket.applications.MyTicket.Service.PassagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class PassagerController {
 
     @Autowired
 
-    private PassagerService passagerService;
+    private PassagerServiceImpl passagerService;
 
     // display list of employees
-    @GetMapping("/index")
-    public String viewHomePage(Model model) {
-        model.addAttribute("listPassagers", passagerService.getAllPassager());
-        return "index";
+
+    @GetMapping("/passagers")
+    public String listPassagers(Model model){
+
+        return listUsers(1,"Nom","asc" ,model);
+
+    }
+    @GetMapping("/pagees/{pageNo}")
+    public String listUsers(@PathVariable(value = "pageNo") int pageNo,
+                            @RequestParam("sortField") String sortField,
+                            @RequestParam("sortDir") String sortDir,
+                            Model model) {
+        int pageSize = 5; // Number of persons per page
+        Page<Passager> page =passagerService.findPaginated(pageNo,pageSize,sortField,sortDir);
+        List<Passager> passagers =page.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("passagers",passagers);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("renverseSortDirt", sortDir.equals("asc")? "dsc" : "asc");
+
+
+        return "passagers";
+
+
+
     }
 
     @GetMapping("/showNewPassagerForm")
@@ -36,7 +62,7 @@ public class PassagerController {
     public String savePassager(@ModelAttribute("passager") Passager passager) {
         // save employee to database
         passagerService.savePassager(passager);
-        return "redirect:/index";
+        return "redirect:/passagers";
     }
 
     @GetMapping("/showFormForUpdate/{id}")
@@ -47,7 +73,7 @@ public class PassagerController {
 
         // set employee as a model attribute to pre-populate the form
         model.addAttribute("passager", passager);
-        return "update_passager";
+        return "UpdatePassager";
     }
 
     @GetMapping("/deletePassager/{id}")
@@ -55,7 +81,7 @@ public class PassagerController {
 
         // call delete employee method
         this.passagerService.deletePassagerById(id);
-        return "redirect:/index";
+        return "redirect:/passagers";
     }
 
 }

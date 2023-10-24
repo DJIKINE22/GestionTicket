@@ -24,8 +24,8 @@ public class CustimSuccessHander implements AuthenticationSuccessHandler {
         if (roles.orElse("").equals("Admin")){
             response.sendRedirect("/admin-page");
 
-        } else if (roles.orElse("").equals("SimpleUser")){
-            response.sendRedirect("/userDashboard");}
+        } else if (roles.orElse("").equals("Guichetier")){
+            response.sendRedirect("/guichet");}
 
         else {
             response.sendRedirect("/ErrorPage");

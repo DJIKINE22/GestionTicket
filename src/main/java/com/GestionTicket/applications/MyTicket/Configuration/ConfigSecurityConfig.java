@@ -36,6 +36,7 @@ public class ConfigSecurityConfig {
                     .requestMatchers("/registration", "/css/**").permitAll()
                     .anyRequest().authenticated())
                     .formLogin(form->form.loginPage("/login").loginProcessingUrl("/login")
+                            .defaultSuccessUrl("/home")
                             .successHandler(custimSuccessHander).permitAll())
                     .logout(form ->form.invalidateHttpSession(true).clearAuthentication(true)
                             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

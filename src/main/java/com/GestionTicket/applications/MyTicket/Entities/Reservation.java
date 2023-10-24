@@ -1,5 +1,6 @@
 package com.GestionTicket.applications.MyTicket.Entities;
 
+import com.GestionTicket.applications.MyTicket.Entity.Passager;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "passager_id")
-    private Passager passagers;
+    private Passager passager;
 
     public Reservation() {
     }
@@ -25,14 +26,14 @@ public class Reservation {
     public Reservation(Date date_reser, Billet billet, Passager passagers) {
         this.date_reser = date_reser;
         this.billet = billet;
-        this.passagers = passagers;
+        this.passager = passagers;
     }
 
     public Reservation(Long id, Date date_reser, Billet billet, Passager passagers) {
         this.id = id;
         this.date_reser = date_reser;
         this.billet = billet;
-        this.passagers = passagers;
+        this.passager = passagers;
     }
 
     public Long getId() {
@@ -60,10 +61,10 @@ public class Reservation {
     }
 
     public Passager getPassagers() {
-        return passagers;
+        return passager;
     }
 
     public void setPassagers(Passager passagers) {
-        this.passagers = passagers;
+        this.passager = passagers;
     }
 }

@@ -1,5 +1,6 @@
 package com.GestionTicket.applications.MyTicket.Entities;
 
+import com.GestionTicket.applications.MyTicket.Entity.Passager;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ public class Billet {
     public Billet() {
     }
 
-    public Billet(Date dateDepart, String destination, Compagnie compagnie, Passager passagers) {
+    public Billet(Date dateDepart, String destination, Compagnie compagnie, Passager passager) {
         this.dateDepart = dateDepart;
         this.destination = destination;
         this.compagnie = compagnie;
