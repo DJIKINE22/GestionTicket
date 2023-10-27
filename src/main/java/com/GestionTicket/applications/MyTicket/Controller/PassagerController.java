@@ -1,8 +1,6 @@
 package com.GestionTicket.applications.MyTicket.Controller;
 
-import com.GestionTicket.applications.MyTicket.Entities.User;
-import com.GestionTicket.applications.MyTicket.Entity.Passager;
-import com.GestionTicket.applications.MyTicket.Service.PassagerService;
+import com.GestionTicket.applications.MyTicket.Entities.Passager;
 import com.GestionTicket.applications.MyTicket.Service.PassagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,6 +47,10 @@ public class PassagerController {
 
 
     }
+    @GetMapping("/addPassager")
+    public  String formAddPassager(){
+        return "addPassager";
+    }
 
     @GetMapping("/showNewPassagerForm")
     public String showNewPassagerForm(Model model) {
@@ -58,11 +60,24 @@ public class PassagerController {
         return "new_passager";
     }
 
+
     @PostMapping("/savePassager")
     public String savePassager(@ModelAttribute("passager") Passager passager) {
         // save employee to database
         passagerService.savePassager(passager);
-        return "redirect:/passagers";
+        return "redirect:/PassagerReservation";
+    }
+    @PostMapping("/savePassagerB")
+    public String savePassage(@ModelAttribute("passager") Passager passager) {
+        // save employee to database
+        passagerService.savePassager(passager);
+        return "redirect:/PassagerBillet";
+    }
+    @PostMapping("/saveClient")
+    public String saveClient(@ModelAttribute("passager") Passager passager) {
+        // save employee to database
+        passagerService.savePassager(passager);
+        return "cliey";
     }
 
     @GetMapping("/showFormForUpdate/{id}")

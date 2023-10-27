@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,13 +10,9 @@
   <title>Dashboard -  Admin</title>
 
   <!-- Inclure les ressources jQuery et DataTables -->
-  <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
-  <script type="text/javascript" th:src="@{/webjars/datatables/1.10.24/js/jquery.dataTables.min.js}"></script>
-  <!-- Inclure Bootstrap si vous l'utilisez -->
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+
   <!-- Inclure les ressources DataTables -->
-  <link rel="stylesheet" th:href="@{/webjars/datatables/1.10.24/css/jquery.dataTables.min.css}" />
-  <script type="text/javascript" th:src="@{/webjars/datatables/1.10.24/js/dataTables.bootstrap4.min.js}"></script>
+
 
 
   <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
@@ -27,16 +24,17 @@
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-primary bg-primary">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
   <!-- Navbar Brand-->
-  <a class="navbar-brand ps-3" th:href="@{/admin-page}">Gestion des Billets</a>
+  <a class="navbar-brand ps-3" th:href="@{/admin-page}">Gestion de Billets</a>
   <!-- Sidebar Toggle-->
   <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
   <!-- Navbar Search-->
-  <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+  <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" th:action="@{/compagnies}">
     <div class="input-group">
-      <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-      <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+
+      <input class="form-control" name="keyword" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+      <button class="btn btn-primary" id="btnNavbarSearch" type="button" value="Search"><i class="fas fa-search"></i></button>
     </div>
   </form>
   <!-- Navbar-->
@@ -101,63 +99,46 @@
         <ol class="breadcrumb mb-4">
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
-
-
-
-          <h1 class="text-center bg-primary text-white mx-auto" style="width: 500px;">Liste des Passagers</h1>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-            Ajouter des passagers
-          </button>
-          <table border="1" class="table table-striped table-responsive-md">
-            <thead>
-            <tr>
-              <th>Nom </th>
-              <th>Prenom </th>
-              <th>Adresse </th>
-              <th>Email </th>
-              <th>Telephone </th>
-              <th> Actions </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="passager : ${passagers}">
-              <td th:text="${passager.nom}"></td>
-              <td th:text="${passager.prenom}"></td>
-              <td th:text="${passager.adresse}"></td>
-              <td th:text="${passager.email}"></td>
-              <td th:text="${passager.telephone}"></td>
-
-              <td> <a th:href="@{/showFormForUpdate/{id}(id=${passager.id})}" class="btn btn-primary">Edit</a>
-                <a th:href="@{/deletePassager/{id}(id=${passager.id})}" class="btn btn-danger">Delete</a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        <div th:if = "${totalPages > 1}">
-          <div class = "row col-sm-10">
-            <div class = "col-sm-2">
-              Total Rows: [[${totalItems}]]
+        <div class="container">
+          <form th:action="@{/saveBillet}" th:object="${billet}"  method="post">
+            <h2 class="text-center">Nouveau Billet</h2>
+            <div class="form-group">
+              <label for="destination" class="form-label">Destination</label>
+              <input type="text"  placeholder="Destination" class="form-control" id="destination" name="destination">
             </div>
-            <div class = "col-sm-1">
-					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/pagees/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-					</span>
+            <div class="form-group">
+              <label for="heure_depart" class="form-label">Heure de Départ</label>
+              <input type="date"   class="form-control" name="date_depart">
             </div>
-            <div class = "col-sm-1">
-              <a th:if="${currentPage < totalPages}" th:href="@{'/pagees/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-              <span th:unless="${currentPage < totalPages}">Next</span>
-            </div>
+            <div class="form-group">
+              <label for="heure_depart" class="form-label">Compagnie</label>
+              <div>
+                <select th:field="*{compagnie}"  class="form-control">
 
-            <div class="col-sm-1">
-              <a th:if="${currentPage < totalPages}" th:href="@{'/pagees/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-              <span th:unless="${currentPage < totalPages}">Last</span>
+                  <th:block th:each="comp: ${ListCompagnie}">
+                    <option th:value="${comp.id}" th:text="${comp.nom}"/>
+                  </th:block>
+                </select>
+              </div>
             </div>
-          </div>
-        </div>
+            <div class="form-group">
+              <label for="heure_depart" class="form-label">Passager</label>
+              <div>
+
+                <select th:field="*{passager}" class="form-control">
+                  <th:block th:each="pass: ${Listpassager}">
+                    <option th:value="${pass.id}" th:text="${pass.nom}"/>
+                  </th:block>
+                </select>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center my-4">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+          </form>
         </div>
 
-
+      </div>
     </main>
     <footer class="py-4 bg-light mt-auto">
       <div class="container-fluid px-4">
@@ -168,41 +149,7 @@
     </footer>
   </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">FORMULAIRE</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <form action="#" th:action="@{/savePassager}" th:object="${passager}" method="POST">
-            <input type="text"  placeholder="Veuille entre votre nom " class="form-control"    name="nom">
-            <br>
-            <input type="text"  placeholder="Veuille entre votre prenom" class="form-control" name="prenom">
-            <br>
-            <input type="text"  placeholder="Veuille entre votre adresse " class="form-control" name="adresse">
-            <br>
-            <input type="text"  placeholder="Veuille entre votre email" class="form-control"  name="email">
-            <br>
-            <input type="text"  placeholder="Veuille entre votre numero " class="form-control"  name="telephone">
-            <br>
-            <button type="submit" class="btn btn-info">Enregistrer</button>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Ferme</button>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
+<!-- Modal  AJOUT-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -218,8 +165,7 @@
 <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

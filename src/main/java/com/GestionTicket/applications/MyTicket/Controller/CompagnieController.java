@@ -81,8 +81,8 @@ public class CompagnieController {
     @GetMapping("/Update/{id}")
     public String UpdateCompaForm(@PathVariable("id") Long id, org.springframework.ui.Model model) {
         Compagnie compa = compagnieService.getCompaById(id);
-        model.addAttribute("compta", compa);  // Ajoute le livre à l'attribut "livre" du modèle
-        return "CompaUpdateForm";  // Assurez-vous que le nom de la vue correspond à votre configuration
+        model.addAttribute("compta", compa);
+        return "CompaUpdateForm";
     }
 
     @GetMapping("/delete/{id}")

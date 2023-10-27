@@ -1,6 +1,6 @@
 package com.GestionTicket.applications.MyTicket.Service;
 
-import com.GestionTicket.applications.MyTicket.Entity.Passager;
+import com.GestionTicket.applications.MyTicket.Entities.Passager;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

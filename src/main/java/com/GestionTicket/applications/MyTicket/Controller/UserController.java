@@ -95,9 +95,9 @@ public class UserController {
 
 
     }
-    @GetMapping("/home")
+    @GetMapping("/")
     public String homepage(){
-        return"home";
+        return"accueil";
     }
     @GetMapping("/login")
     public String Afficherlogin(){

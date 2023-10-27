@@ -33,6 +33,7 @@ public class ConfigSecurityConfig {
             http.csrf(c ->c.disable())
                     .authorizeHttpRequests(request-> request.requestMatchers("/admin-page")
                     .hasAuthority("Admin").requestMatchers("/user-page").hasAuthority("User")
+                            .requestMatchers("/","/RegisterBillet","/acheter-ticket","/saveClient","/PassagerReservation","/PassagerBillet","/addPassager","/addPassagerB","/newReservation","/savePassager","/savePassagerB","/css/**","/img/**").permitAll()
                     .requestMatchers("/registration", "/css/**").permitAll()
                     .anyRequest().authenticated())
                     .formLogin(form->form.loginPage("/login").loginProcessingUrl("/login")

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Asset/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Reservation</title>
+    <style>
+
+        #agence{
+            font-family: 'Crete Round', sans-serif;
+            float: left;
+            color: #444;
+            font-size: 45px;
+
+        }
+        span{
+            color: orangered;
+            font-size: 45px;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top ">
+    <h1 id="agence">Travel Agency <span>.</span> </h1>
+
+</nav>
+<!--<header>
+    <div class="nav">
+        <h1 id="agence">Travel Agency <span>.</span> </h1>
+        <ul>
+            <a th:href="@{/addPassager}"><li>RESERVER TICKET</li></a>
+            <a href=""><li>ACHETER  BILLET</li></a>
+            <a th:href="@{/login}"><li>LOGIN</li></a>
+        </ul>
+    </div>
+</header>-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 mx-auto">
+
+            <form th:action="@{/RegisterBillet}" method="post">
+                <h2 class="text-center">Nouveau Billet</h2>
+                <div class="form-group">
+                    <label for="destination" class="form-label">Destination</label>
+                    <input type="text" placeholder="Destination" class="form-control" id="destination" name="destination">
+                </div>
+                <div class="form-group">
+                    <label for="heure_depart" class="form-label">Date de Départ</label>
+                    <input type="date" id="heure_depart" class="form-control" name="date_depart">
+                </div>
+                <div class="mb-3">
+                    <label  class="form-label">Compagnie</label>
+
+                    <select  name="compagnie" class="form-control">
+                        <th:block th:each="comp: ${ListCompagnie}">
+                            <option th:value="${comp.id}" th:text="${comp.nom}"/>
+                        </th:block>
+                    </select>
+
+                </div>
+                <div class=" mb-3 d-none" >
+                    <label type="hidden" class="form-label">Passager</label>
+
+                    <select  name="passager"  class="form-control">
+                        <th:block th:each="pass: ${passager}">
+                            <option    th:value="${pass.id}" th:text="${pass.nom}"/>
+                        </th:block>
+                    </select>
+
+                </div>
+
+
+                <div class="d-flex justify-content-center align-items-center my-4">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

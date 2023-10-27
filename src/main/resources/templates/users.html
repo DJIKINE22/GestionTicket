@@ -81,7 +81,7 @@
                     <div class="collapse" id="collapseLayout" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" th:href="@{/compagnies}">Compagnies</a>
-                            <a class="nav-link" th:href="@{/ticket}">Tickets</a>
+                            <a class="nav-link" th:href="@{/billets}">Tickets</a>
                             <a class="nav-link" th:href="@{/passagers}">Passagers</a>
                         </nav>
                     </div>
@@ -132,7 +132,6 @@
             <td class="text-center" >
                 <a th:href="@{'/deleteUser/' + ${user.id}}" class="btn btn-danger">Delete</a>
                 <a th:href="@{/UpdateUser/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
-
             </td>
         </tr>
         </tbody>

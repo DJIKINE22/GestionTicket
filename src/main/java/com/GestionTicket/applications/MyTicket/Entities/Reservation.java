@@ -1,7 +1,7 @@
 package com.GestionTicket.applications.MyTicket.Entities;
 
-import com.GestionTicket.applications.MyTicket.Entity.Passager;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Entity
@@ -10,30 +10,30 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Date date_reser;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date_depart;
+    private  String destination;
+    private String heure;
+    private int nbre_place;
+
 
     @ManyToOne
-    @JoinColumn(name = "billet_id")
-    private Billet billet;
-
+    @JoinColumn(name = "compagnie")
+    private Compagnie compagnie;
     @ManyToOne
-    @JoinColumn(name = "passager_id")
+    @JoinColumn(name = "passager")
     private Passager passager;
 
     public Reservation() {
     }
 
-    public Reservation(Date date_reser, Billet billet, Passager passagers) {
-        this.date_reser = date_reser;
-        this.billet = billet;
-        this.passager = passagers;
-    }
-
-    public Reservation(Long id, Date date_reser, Billet billet, Passager passagers) {
-        this.id = id;
-        this.date_reser = date_reser;
-        this.billet = billet;
-        this.passager = passagers;
+    public Reservation(Date date_depart, String destination, String heure, int nbre_place, Compagnie compagnie, Passager passager) {
+        this.date_depart = date_depart;
+        this.destination = destination;
+        this.heure = heure;
+        this.nbre_place = nbre_place;
+        this.compagnie = compagnie;
+        this.passager = passager;
     }
 
     public Long getId() {
@@ -44,27 +44,51 @@ public class Reservation {
         this.id = id;
     }
 
-    public Date getDate_reser() {
-        return date_reser;
+    public Date getDate_depart() {
+        return date_depart;
     }
 
-    public void setDate_reser(Date date_reser) {
-        this.date_reser = date_reser;
+    public void setDate_depart(Date date_depart) {
+        this.date_depart = date_depart;
     }
 
-    public Billet getBillet() {
-        return billet;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setBillet(Billet billet) {
-        this.billet = billet;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
-    public Passager getPassagers() {
+    public String getHeure() {
+        return heure;
+    }
+
+    public void setHeure(String heure) {
+        this.heure = heure;
+    }
+
+    public int getNbre_place() {
+        return nbre_place;
+    }
+
+    public void setNbre_place(int nbre_place) {
+        this.nbre_place = nbre_place;
+    }
+
+    public Compagnie getCompagnie() {
+        return compagnie;
+    }
+
+    public void setCompagnie(Compagnie compagnie) {
+        this.compagnie = compagnie;
+    }
+
+    public Passager getPassager() {
         return passager;
     }
 
-    public void setPassagers(Passager passagers) {
-        this.passager = passagers;
+    public void setPassager(Passager passager) {
+        this.passager = passager;
     }
 }

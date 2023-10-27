@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Asset/css/style.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>S'enregister</title>
+  <style>
+
+    #agence{
+      font-family: 'Crete Round', sans-serif;
+      float: left;
+      color: #444;
+      font-size: 45px;
+
+    }
+    span{
+      color: orangered;
+      font-size: 45px;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top ">
+  <h1 id="agence">Travel Agency <span>.</span> </h1>
+
+</nav>
+<div class="container mx-auto mt-5">
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <form class="form-horizontal" th:action="@{/savePassagerB}" th:object="${passager}" method="POST">
+        <h2 class="text-center my-4">Veuillez renseigner les champs</h2>
+        <div class="form-group">
+          <label class="control-label col-sm-2">NOM</label>
+          <div class="col-sm-10">
+            <input type="text"  placeholder="Veuille entre votre nom " class="form-control"    name="nom">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10">
+            <label class="control-label col-sm-2">PRENOM</label>
+            <input type="text"  placeholder="Veuille entre votre prenom" class="form-control" name="prenom">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">ADRESSE</label>
+          <div class="col-sm-10">
+            <input type="text"  placeholder="Veuille entre votre adresse " class="form-control" name="adresse">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">EMAIL</label>
+          <div class="col-sm-10">
+            <input type="text"  placeholder="Veuille entre votre email" class="form-control"  name="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">TELEPHONE</label>
+          <div class="col-sm-10">
+            <input type="text"  placeholder="Veuille entre votre numero " class="form-control"  name="telephone">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center my-4">
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

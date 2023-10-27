@@ -66,8 +66,8 @@
                     </a>
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" th:href="@{/users}">users</a>
-
+                            <a class="nav-link" th:href="@{/users}">Admin</a>
+                            <a class="nav-link" th:href="@{/guichetier}">Guichetier</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout" aria-expanded="false" aria-controls="collapseLayouts">
@@ -78,8 +78,7 @@
                     <div class="collapse" id="collapseLayout" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" th:href="@{/compagnies}">Compagnies</a>
-                            <a class="nav-link" th:href="@{/reservations}">Reservations</a>
-                            <a class="nav-link" th:href="@{/reservations}">Billets</a>
+                            <a class="nav-link" th:href="@{/billets}">Tickets</a>
                             <a class="nav-link" th:href="@{/passagers}">Passagers</a>
                         </nav>
                     </div>
@@ -108,7 +107,7 @@
                                 Ajouter un Billet
                             </a>
 
-                            <h1 class="text-center">Progamme de Voyage!</h1>
+                            <h1 class="text-center">RESERVATIONS!</h1>
                         </div>
                     </div>
 
@@ -123,7 +122,7 @@
                             </th>
                             <th>
                                 <a class="text-white"  th:href="@{'/page/' + ${currentPage} + '?sortField=nom&sortDir=' + ${renverseSortDirt}}">
-                                     Compagnie</a>
+                                    Compagnie</a>
                             </th>
                             <th>
                                 <a class="text-white"  th:href="@{'/page/' + ${currentPage} + '?sortField=nom&sortDir=' + ${renverseSortDirt}}">
@@ -135,21 +134,26 @@
                             </th>
                             <th>
                                 <a class="text-white"  th:href="@{'/page/' + ${currentPage} + '?sortField=lieu&sortDir=' + ${renverseSortDirt}}">
+                                    Heure de voyage</a>
+                            </th>
+                            <th>
+                                <a class="text-white"  th:href="@{'/page/' + ${currentPage} + '?sortField=lieu&sortDir=' + ${renverseSortDirt}}">
                                     Destination</a>
                             </th>
                             <th class="text-center"   >Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="C:${billet}">
+                        <tr th:each="C:${reservation}">
                             <td class="text-center"  th:text="${C.id}"></td>
                             <td class="text-center"  th:text="${C.compagnie.nom}"></td>
                             <td class="text-center"  th:text="${C.passager.nom}"></td>
                             <td class="text-center"  th:text="${C.date_depart}"></td>
+                            <td class="text-center"  th:text="${C.heure}"></td>
                             <td class="text-center"  th:text="${C.destination}"></td>
                             <td class="text-center" >
-                                <a th:href="@{'/deleteBillet/' + ${C.id}}" class="btn btn-danger">Delete</a>
-                                <a th:href="@{/UpdateBillet/{id}(id=${C.id})}" class="btn btn-primary">Edit</a>
+                                <a th:href="@{'/Detail/' + ${C.id}}" class="btn btn-danger">Detail</a>
+                                <a th:href="@{/UpdateReservation/{id}(id=${C.id})}" class="btn btn-primary">Edit</a>
 
                             </td>
                         </tr>
@@ -196,7 +200,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title my-3" id="exampleModalLabel">Ajouter un Billet</h5>
+                <h5 class="modal-title my-3" id="exampleModalLabel">Ajouter une reservation</h5>
                 </button>
             </div>
             <div class="modal-body">

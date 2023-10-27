@@ -1,12 +1,13 @@
-package com.GestionTicket.applications.MyTicket.Entity;
+package com.GestionTicket.applications.MyTicket.Entities;
 
 import jakarta.persistence.*;
+import org.intellij.lang.annotations.Pattern;
 
 @Entity
 @Table(name = "Passager")
 public class Passager {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "nom")
@@ -19,7 +20,19 @@ public class Passager {
     @Column(name = "email")
     private String email;
     @Column(name = "telephone")
-    private Integer telephone;
+    @Pattern( "\\+223\\d{8}")
+    private String telephone;
+
+    public Passager() {
+    }
+
+    public Passager(String nom, String prenom, String adresse, String email, String telephone) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.email = email;
+        this.telephone = telephone;
+    }
 
     public long getId() {
         return id;
@@ -61,11 +74,11 @@ public class Passager {
         this.email = email;
     }
 
-    public Integer getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 }

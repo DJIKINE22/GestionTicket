@@ -70,8 +70,8 @@
           </a>
           <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav">
-              <a class="nav-link" th:href="@{/users}">Admin</a>
-              <a class="nav-link" th:href="@{/guichetier}">Guichetier</a>
+              <a class="nav-link" th:href="@{/users}">users</a>
+
             </nav>
           </div>
           <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayout" aria-expanded="false" aria-controls="collapseLayouts">
@@ -82,7 +82,8 @@
           <div class="collapse" id="collapseLayout" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav">
               <a class="nav-link" th:href="@{/compagnies}">Compagnies</a>
-              <a class="nav-link" th:href="@{/ticket}">Tickets</a>
+              <a class="nav-link" th:href="@{/reservations}">Reservations</a>
+              <a class="nav-link" th:href="@{/reservations}">Billets</a>
               <a class="nav-link" th:href="@{/passagers}">Passagers</a>
             </nav>
           </div>
@@ -115,7 +116,7 @@
             </div>
           </div>
 
-          <!--<table  class="table table-striped table-hover table-bordered table-responsive">
+          <table  class="table table-striped table-hover table-bordered table-responsive">
 
 
             <thead class="table-header">
@@ -149,8 +150,8 @@
             </tr>
 
             </tbody>
-          </table>-->
-          <div class="row">
+          </table>
+          <!--<div class="row">
             <div class="col">
               <div class="card" style="width: 18rem;">
                 <img class="card-img-top" th:src="@{/img/Nour.jpeg}" alt="Card image cap">
@@ -167,7 +168,7 @@
                 </div>
               </div>
             </div>
-            <!--   Gana  -->
+             Gana
             <div class="col">
               <div class="card" style="width: 18rem;">
                 <img class="card-img-top" th:src="@{/img/bus.jpeg}" alt="Card image cap">
@@ -178,7 +179,7 @@
                 </div>
               </div>
             </div>
-            <!--   Africa Tour  -->
+
             <div class="col">
               <div class="card" style="width: 18rem;">
                 <img class="card-img-top" th:src="@{/img/Africatour}" alt="Card image cap">
@@ -188,7 +189,7 @@
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
-            </div>
+            </div>-->
 
           </div>
           <div th:if = "${totalPages > 1}">
@@ -215,7 +216,6 @@
           </div>
         </div>
 
-      </div>
     </main>
     <footer class="py-4 bg-light mt-auto">
       <div class="container-fluid px-4">

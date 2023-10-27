@@ -12,8 +12,8 @@ import java.util.List;
 
 @Repository
 public interface CompagnieRepository extends JpaRepository<Compagnie,Long> {
-    Page<Compagnie> findAll(Pageable pageable);
 
-    @Query("SELECT c FROM Compagnie c where c.nom like %?1%")
-    public List<Compagnie> findAll();
+
+
+
 }

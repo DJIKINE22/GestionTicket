@@ -1,7 +1,6 @@
 package com.GestionTicket.applications.MyTicket.Service;
 
-import com.GestionTicket.applications.MyTicket.Entities.User;
-import com.GestionTicket.applications.MyTicket.Entity.Passager;
+import com.GestionTicket.applications.MyTicket.Entities.Passager;
 import com.GestionTicket.applications.MyTicket.Reposirtory.PassagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
 public class PassagerServiceImpl implements PassagerService {
     @Autowired
     private PassagerRepository passagerRepository;
@@ -53,6 +51,10 @@ public class PassagerServiceImpl implements PassagerService {
                 Sort.by(sortField).descending();
         Pageable pageable = PageRequest.of(pageNo -1,pageSize,sort);
         return this.passagerRepository.findAll(pageable);
+    }
+
+    public Passager getDernierPassager() {
+        return passagerRepository.findTopByOrderByIdDesc();
     }
 
 }
