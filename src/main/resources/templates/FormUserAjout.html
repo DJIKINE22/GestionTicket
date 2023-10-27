@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home-Librairie 2023</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Asset/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Veuillez renseigner les champs</title>
+    <style>
+
+        #agence{
+            font-family: 'Crete Round', sans-serif;
+            float: left;
+            color: #444;
+            font-size: 45px;
+
+        }
+        span{
+            color: orangered;
+            font-size: 45px;
+        }
+
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg  bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">Librairie 2023</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="livre_dispo">Livres Disponibles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="all_livre"> Mes Livres </a>
-                </li>
-            </ul>
-            <div>
-                <a class="nav-link text-white" href="livre_create"> Add User </a>
-            </div>
-        </div>
-    </div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top ">
+    <h1 id="agence">Travel Agency <span>.</span> </h1>
+
 </nav>
 <div class="container my-5 p-5" style=" border: 1px solid Black">
     <form class="col-md-4 offset-md-4" th:action="@{/registration}" method="post">
@@ -53,7 +55,7 @@
             <label for="role" class="form-label">Role</label>
             <select name="role" id="role" class="form-select">
                 <option value="Admin" class="form-control">Admin</option>
-                <option value="SimpleUser" class="form-control">SimpleUser</option>
+                <option value="Guichetier" class="form-control">Guichetier</option>
             </select>
 
         </div>
